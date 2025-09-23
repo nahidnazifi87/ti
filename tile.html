@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoveWall - Dynamic Tile</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+    }
+    .wall-container {
+      position: relative;
+      width: 400px;  /* adjust wall size */
+      height: 400px;
+    }
+    .wall {
+      width: 100%;
+      height: 100%;
+    }
+    .overlay {
+      position: absolute;
+      border: 2px solid white;
+      box-shadow: 0 0 10px rgba(255,255,255,0.7);
+    }
+    .overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="wall-container">
+    <!-- Base wall image -->
+    <img src="wall-base.jpg" alt="Wall" class="wall">
+
+    <!-- Overlay container -->
+    <div class="overlay" id="overlay">
+      <img id="overlayImage" src="" alt="Overlay">
+    </div>
+  </div>
+
+  <script>
+    // Grid configuration
+    const rows = 5;   // number of rows
+    const cols = 5;   // number of columns
+    const wallSize = 400; // wall size in px
+    const tileWidth = wallSize / cols;
+    const tileHeight = wallSize / rows;
+
+    // Get query parameters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const row = parseInt(urlParams.get("row")) || 1;
+    const col = parseInt(urlParams.get("col")) || 1;
+    const photo = urlParams.get("img") || "default.jpg";
+
+    // Position overlay
+    const overlay = document.getElementById("overlay");
+    overlay.style.width = `${tileWidth}px`;
+    overlay.style.height = `${tileHeight}px`;
+    overlay.style.left = `${(col - 1) * tileWidth}px`;
+    overlay.style.top = `${(row - 1) * tileHeight}px`;
+
+    // Set overlay image
+    document.getElementById("overlayImage").src = photo;
+  </script>
+</body>
+</html>
