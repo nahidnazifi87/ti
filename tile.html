@@ -37,7 +37,8 @@
 </head>
 <body>
 <div class="wall-container">
-  <img src="wall.jpg" alt="Wall" class="wall" id="wall">
+  <!-- Wall image in the same folder as this HTML -->
+  <img src="hand.JPG" alt="Wall" class="wall" id="wall">
   <div class="overlay" id="overlay">
     <img id="overlayImage" src="" alt="Overlay">
   </div>
@@ -60,15 +61,17 @@ wall.onload = () => {
   const tileHeight = wallHeight / rows;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const row = parseInt(urlParams.get("row")) || 1; // 1-3
-  const col = parseInt(urlParams.get("col")) || 1; // 1-4
-  const photo = urlParams.get("img") || "images/1.png";
+  const row = parseInt(urlParams.get("row")) || 1; // default 1
+  const col = parseInt(urlParams.get("col")) || 1; // default 1
+  const photo = urlParams.get("img") || "images/1.jpeg"; // default overlay
 
+  // Set overlay size & position
   overlay.style.width = `${tileWidth}px`;
   overlay.style.height = `${tileHeight}px`;
   overlay.style.left = `${(col - 1) * tileWidth}px`;
   overlay.style.top = `${(row - 1) * tileHeight}px`;
 
+  // Set overlay image and show
   overlayImage.src = photo;
   overlay.style.display = "block";
 };
