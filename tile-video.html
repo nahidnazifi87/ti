@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoveWall Video Overlay (Dropbox iframe)</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #111;
+  }
+  .wall-container {
+    position: relative;
+    display: inline-block;
+  }
+  .wall {
+    display: block;
+    max-width: 90vw;
+    height: auto;
+  }
+  .overlay {
+    position: absolute;
+    display: none;
+    border: 2px solid white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.7);
+  }
+  .overlay iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+</head>
+<body>
+<div class="wall-container">
+  <!-- Wall image -->
+  <img src="hand.JPG" alt="Wall" class="wall" id="wall">
+
+  <!-- Overlay video (iframe instead of video) -->
+  <div class="overlay" id="overlay">
+    <iframe id="overlayVideo" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+const overlay = document.getElementById('overlay');
+const overlayVideo = document.getElementById('overlayVideo');
+const wall = document.getElementById('wall');
+
+wall.onload = () => {
+  const wallRect = wall.getBoundingClientRect();
+  const wallWidth = wallRect.width;
+  const wallHeight = wallRect.height;
+
+  const rows = 3;
+  const cols = 4;
+
+  const tileWidth = wallWidth / cols;
+  const tileHeight = wallHeight / rows;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const row = parseInt(urlParams.get("row")) || 1;
+  const col = parseInt(urlParams.get("col")) || 1;
+  let videoFile = urlParams.get("video") || "";
+
+  // If it's a Dropbox link, force direct raw playback
+  if (videoFile.includes("dropbox.com")) {
+    videoFile = videoFile.replace("dl=0", "raw=1").replace("?dl=0", "?raw=1");
+  }
+
+  overlay.style.width = `${tileWidth}px`;
+  overlay.style.height = `${tileHeight}px`;
+  overlay.style.left = `${(col - 1) * tileWidth}px`;
+  overlay.style.top = `${(row - 1) * tileHeight}px`;
+
+  overlayVideo.src = videoFile;
+  overlay.style.display = "block";
+};
+</script>
+</body>
+</html>
