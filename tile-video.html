@@ -40,7 +40,7 @@
   <!-- Wall image -->
   <img src="hand.JPG" alt="Wall" class="wall" id="wall">
 
-  <!-- Overlay video (iframe instead of video) -->
+  <!-- Overlaying video (iframe instead of video) -->
   <div class="overlay" id="overlay">
     <iframe id="overlayVideo" allow="autoplay; fullscreen" allowfullscreen></iframe>
   </div>
@@ -67,7 +67,7 @@ wall.onload = () => {
   const col = parseInt(urlParams.get("col")) || 1;
   let videoFile = urlParams.get("video") || "";
 
-  // If it's a Dropbox link, force direct raw playback
+  // forceing direct raw playback for Dropbox links
   if (videoFile.includes("dropbox.com")) {
     videoFile = videoFile.replace("dl=0", "raw=1").replace("?dl=0", "?raw=1");
   }

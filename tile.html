@@ -37,7 +37,7 @@
 </head>
 <body>
 <div class="wall-container">
-  <!-- Wall image in the same folder as this HTML -->
+ 
   <img src="hand.JPG" alt="Wall" class="wall" id="wall">
   <div class="overlay" id="overlay">
     <img id="overlayImage" src="" alt="Overlay">
@@ -65,13 +65,13 @@ wall.onload = () => {
   const col = parseInt(urlParams.get("col")) || 1; // default 1
   const photo = urlParams.get("img") || "images/1.jpeg"; // default overlay
 
-  // Set overlay size & position
+  // Seting overlay size & position
   overlay.style.width = `${tileWidth}px`;
   overlay.style.height = `${tileHeight}px`;
   overlay.style.left = `${(col - 1) * tileWidth}px`;
   overlay.style.top = `${(row - 1) * tileHeight}px`;
 
-  // Set overlay image and show
+  // Seting overlay image and show
   overlayImage.src = photo;
   overlay.style.display = "block";
 };

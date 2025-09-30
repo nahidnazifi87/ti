@@ -5,7 +5,7 @@
   <title>AR Hand Overlay</title>
   <!-- 1. A-Frame first -->
   <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe.min.js"></script>
-  <!-- 2. Three.js (used by MindAR) -->
+  <!-- 2. Three.js used by MindAR -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <!-- 3. MindAR libraries -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
@@ -18,12 +18,12 @@
   <!-- MindAR AR scene -->
   <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: true">
     
-    <!-- Camera -->
+    
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
     
-    <!-- Anchor for first hand target -->
+    <!-- Anchoring first hand target -->
     <a-entity mindar-image-target="targetIndex: 0">
-      <!-- The overlay image you want to appear on the hand -->
+      <!-- The overlay image we want to appear on the hand -->
       <a-image src="./images/1.jpeg" position="0 0 0" height="0.5" width="0.5"></a-image>
     </a-entity>
     
